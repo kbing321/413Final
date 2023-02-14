@@ -8,7 +8,7 @@ using Mission06_kbing321.Models;
 namespace Mission06_kbing321.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20230214025213_Initial")]
+    [Migration("20230214032040_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
