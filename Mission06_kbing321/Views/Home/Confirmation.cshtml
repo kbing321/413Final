@@ -1,0 +1,8 @@
+﻿@{
+    ViewData["Title"] = "Movie Saved";
+}
+
+@model MovieEntryForm
+
+<h2>The movie @Model.Title has been saved.</h2><br /><br />
+<a asp-area="" asp-controller="Home" asp-action="NewMovie">Go Back</a>
