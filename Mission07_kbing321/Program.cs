@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mission06_kbing321
+namespace Mission07_kbing321
 {
     public class Program
     {

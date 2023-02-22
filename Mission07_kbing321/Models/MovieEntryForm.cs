@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mission06_kbing321.Models
+namespace Mission07_kbing321.Models
 {
     // form model for new movie info
     public class MovieEntryForm
@@ -12,9 +12,6 @@ namespace Mission06_kbing321.Models
         [Key]
         [Required]
         public int MovieId { get; set; }
-
-        [Required]
-        public string Category { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -33,5 +30,10 @@ namespace Mission06_kbing321.Models
         public string LentTo { get; set; }
 
         public string Notes { get; set; }
+        
+        // build fk relationship
+        [Required]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

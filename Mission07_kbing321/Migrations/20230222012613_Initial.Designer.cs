@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Mission06_kbing321.Models;
+using Mission07_kbing321.Models;
 
-namespace Mission06_kbing321.Migrations
+namespace Mission07_kbing321.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20230214032040_Initial")]
+    [Migration("20230222012613_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,15 +17,70 @@ namespace Mission06_kbing321.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.17");
 
-            modelBuilder.Entity("Mission06_kbing321.Models.MovieEntryForm", b =>
+            modelBuilder.Entity("Mission07_kbing321.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Horror/Suspense"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Miscellaneous"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryName = "Television"
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            CategoryName = "VHS"
+                        });
+                });
+
+            modelBuilder.Entity("Mission07_kbing321.Models.MovieEntryForm", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -53,13 +108,15 @@ namespace Mission06_kbing321.Migrations
 
                     b.HasKey("MovieId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Movies");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            Category = "Action/Adventure",
+                            CategoryId = 1,
                             Director = "Christopher Nolan",
                             Edited = false,
                             LentTo = "",
@@ -71,7 +128,7 @@ namespace Mission06_kbing321.Migrations
                         new
                         {
                             MovieId = 2,
-                            Category = "Drama",
+                            CategoryId = 3,
                             Director = "Christopher Nolan",
                             Edited = false,
                             LentTo = "",
@@ -83,7 +140,7 @@ namespace Mission06_kbing321.Migrations
                         new
                         {
                             MovieId = 3,
-                            Category = "Action/Adventure",
+                            CategoryId = 1,
                             Director = "Jon Watts",
                             Edited = false,
                             LentTo = "",
@@ -92,6 +149,17 @@ namespace Mission06_kbing321.Migrations
                             Title = "Spider-man: No Way Home",
                             Year = 2021
                         });
+                });
+
+            modelBuilder.Entity("Mission07_kbing321.Models.MovieEntryForm", b =>
+                {
+                    b.HasOne("Mission07_kbing321.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }
